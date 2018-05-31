@@ -12,6 +12,9 @@ app.use(express.static('public'));
 const taskRouter = require('./taskRouter')
 app.use('/task', taskRouter)
 
+const timeSessions = require('./timeSessionRouter')
+app.use('/timesession', timeSessions)
+
 let server;
 
 

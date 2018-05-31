@@ -5,13 +5,15 @@ mongoose.Promise = global.Promise;
 
 const taskSchema =  mongoose.Schema({
     name: String,
-    timeCommit: Number
+    timeCommit: Number,
+    timeSessions: [{type: mongoose.Schema.Types.ObjectId,ref:'TimeTracker'}]
 }); 
 
 
 const timeTrackerSchema = mongoose.Schema({
     timeStart : Date,
-    timeStop : Date
+    timeStop : Date,
+    task: {type: mongoose.Schema.Types.ObjectId,ref:'Task'}
 });    
     
 

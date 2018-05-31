@@ -70,43 +70,72 @@ router.post('/', jsonParser, (req, res) => {
     })
 });
 
-// This is how is should be for the time start crud
-// create({
-//   timeStart: Date.now()
-// })
-
-// router.delete('/:id', (req, res) => {
-//     Task.delete(req.params.id);
-//     console.log(`Deleted task item \`${req.params.id}\``)
-//     res.status(204).end();
-// });
 
 
-// router.put('/:id', jsonParser, (req, res) => {
-//     const requiredFields = ['taskName', 'timeCommit'];
-//     for (let i=0; i<requiredFields.length; i++) {
-//       const field = requiredFields[i];
-//       if (!(field in req.body)) {
-//         const message = `Missing \`${field}\` in request body`;
-//         console.error(message);
-//         return res.status(400).send(message);
-//       }
-//     }
-//     if (req.params.id !== req.body.id) {
-//       const message = (
-//         `Request path id (${req.params.id}) and request body id `
-//         `(${req.body.id}) must match`);
-//       console.error(message);
-//       return res.status(400).send(message);
-//     }
-//     console.log(`Updating task list \`${req.params.id}\``);
-//     const updatedItem = Task.update({
-//       id: req.params.id,
-//       name: req.body.name,
-//       checked: req.body.checked
-//     });
-//     res.status(200).json(updatedItem);
-//   });
+router.post('/', jsonParser, (req, res) => {
+
+  const requiredFields = ['timeStart', "timeStop"]
+    for (let i = 0; i , requiredFields.length; i++){
+      const field = requiredFields[i];
+      if (!(field in req.body)){
+          const message = `Missing ${field} in request body`;
+          console.log(message `time section`)
+          return res.status(400).send(message)
+      }      
+    }
+    Task
+    .create({
+      timeStart: req.body.timeStart,
+      timeStop: req.body.timeStop
+
+    })
+})
+
+
+router.put('/:id', jsonParser, (req, res) => {
+
+  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+    const message = (
+      `Request path id (${req.params.id}) and rquest body id ${req.body.id} must match.`)
+      console.log(message);
+      return res.status(400).json({message:message})
+   }
+
+   const toUpdate = {}
+   const updateableFields = ["taskName", 'timeCommit'];
+
+   updateableFields.forEach(field => {
+     if (field in req.body) {
+       toUpdate[field]= req.body[field]
+     }
+   });
+
+   Task
+   .findByIdAndUpdate(req.params.id, {$set: toUpdate})
+   .then(task => res.status(204).json({message: `sucess`}))
+   .catch(err => res.status(500).json({message: `Internal server error put`}));
+});
+
+router.delete('/:id', (req, res) => {
+
+  Task
+    .findByIdAndRemove(req.params.id)
+    .then(rest => res.status(204).end())
+    .catch(err => res.status(500).json({message: `Internal server error delete`}));
+});
+
+router.use('*', function (req, res){
+  res.status(404).json({message: `Woops 404 not found`});
+});
+
+
+
+
+
+
+
+
+
   
   module.exports = router;
   

@@ -44,47 +44,23 @@ router.post('/:TaskId', jsonParser, (req, res) => {
 
 })
 
-// Model.findByIdAndUpdate(id, { name: 'jason bourne' }, options, callback)
-// timeStop: Date.now()
 
 
-router.put('/:id', jsonParser, (req, res) =>{
+
+router.put('/:TaskId', jsonParser, (req, res) =>{
+    
     Task
     .findByIdAndUpdate(req.params.TaskId, {$set: {timeStop: Date.now()}})
     .then(timeSession => {
-        task.timeSessions.push(timeSession._id)
-        task.save().then(task => {
-            res.status(201).json(timeSession)
-        });
-        
+        res.status(201).json(timeSession)
+                
     })
     .catch(err => {
+        console.log(err)
         res.status(500).json({error: "did not put"})
     })
-})
+});
 
-// router.put('/:id', jsonParser, (req, res) => {
-   
-    
-//     .then(task => {
-//         return TimeTracker.create({
-//             task: task._id,
-//             timeStop: Date.now()
-            
-//         })
-//         .then(timeSession => {
-//             task.timeSessions.push(timeSession._id)
-//             task.save().then(task => {
-//                 res.status(201).json(timeSession)
-//             })
-//         })
-
-//     })
-//     .catch(err => {
-//         res.status(500).json({error:"did not find the time session"})
-//     })
-
-// })
 
 
 

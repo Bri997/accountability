@@ -120,9 +120,13 @@ router.delete('/:id', (req, res) => {
 
   Task
     .findByIdAndRemove(req.params.id)
-    .then(rest => res.status(204).end())
-    .catch(err => res.status(500).json({message: `Internal server error delete`}));
+    .then(task => res.status(204).json({message: "deleted"}))
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({message: `Internal server error delete`})});
 });
+
+
 
 router.use('*', function (req, res){
   res.status(404).json({message: `Woops 404 not found`});

@@ -51,12 +51,30 @@ $('.getMyTasks').click(e => {
     .then(response => response.json())
     .then(tasks => {
       console.log(tasks)
-      for(i = 0; i > tasks; i++){
-        $('.displayData').append(`<div> ${task[i].name}</div><div> ${task[i].timeCommit} <button class = "deleteButton" type="button">Remove</button> </div>`)
+      for(i = 0; i < tasks.length; i++){
+        $('.displayData').append(`
+        <div> ${tasks[i].name}</div>
+            <div> ${tasks[i].timeCommit} 
+            <button data-id = "${tasks[i]._id}"class = "deleteButton" type="button">Remove</button> 
+            </div>`)
       }
       
     })
 
 })
     
-   
+$('.displayData').on("click", ".deleteButton", e => {
+    e.preventDefault();
+    const id = $(e.target).data("id")
+    console.log(id);
+
+    fetch (`/task/${id}`, {
+        method: "delete",
+        headers: {
+            'content-type': 'application/json'
+        }
+      
+    })
+    .then(res => {})
+  
+})

@@ -47,10 +47,10 @@ router.post('/:TaskId', jsonParser, (req, res) => {
 
 
 
-router.put('/:TaskId', jsonParser, (req, res) =>{
+router.put('/:timeSession', jsonParser, (req, res) =>{
     
-    Task
-    .findByIdAndUpdate(req.params.TaskId, {$set: {timeStop: Date.now()}})
+    TimeTracker
+    .findByIdAndUpdate(req.params.timeSession, {$set: {timeStop: Date.now()}})
     .then(timeSession => {
         res.status(201).json(timeSession)
                 

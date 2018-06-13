@@ -35,6 +35,7 @@ const {Task} = require('./taskModel')
 router.get('/', (req, res) => {
     Task
     .find()
+    .populate("timeSessions")
     .then(tasks => {
       res.json(tasks)
     })
@@ -96,13 +97,13 @@ router.put('/:id', jsonParser, (req, res) => {
 
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
-      `Request path id (${req.params.id}) and rquest body id ${req.body.id} must match.`)
+      `Request path id (${req.params.id}) and request body id ${req.body.id} must match.`)
       console.log(message);
       return res.status(400).json({message:message})
    }
 
    const toUpdate = {}
-   const updateableFields = ["taskName", 'timeCommit'];
+   const updateableFields = ["name", 'timeCommit'];
 
    updateableFields.forEach(field => {
      if (field in req.body) {

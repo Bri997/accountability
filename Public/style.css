@@ -61,10 +61,19 @@
 
 .startButton {
     background-color: lime;
-    height: 200px;
-    width: 200px;
+    height: 50px;
+    width: 50px;
     border-radius: 100px;
     border: 1px;
+}
+
+.stopButton {
+    background-color: rgb(243, 74, 23);
+    height: 50px;
+    width: 50px;
+    border-radius: 100px;
+    border: 1px;
+    color: white;
 }
 
 .upDateTasks {

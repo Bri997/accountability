@@ -19,12 +19,21 @@ const render = () => {
     $('.displayData').empty();
     const tasks = data.tasks;
     tasks.forEach(task => {
+
+        const totalTime = task.timeSessions.reduce((acc, curr) => {
+            let start = moment(curr.timeStart);
+            let end = moment(curr.timeStop);
+            let duration = moment.duration(end.diff(start));
+            let milliseconds = duration.asMilliseconds();
+            return acc + milliseconds;
+        }, 0);
+        
         const openSessions = task.timeSessions.filter(session => !session.timeStop) 
         let buttons = ""
         if(openSessions.length > 0){
             buttons = openSessions
             .map(session => 
-                `<button data-id = "${session._id}" data-taskId = "${task._id}" class = "stopButton" type = "button"> Stop </button>`
+                `<button data-id = "${session._id}" data-taskid = "${task._id}" class = "stopButton" type = "button"> Stop </button>`
             ).join('')}
         else {buttons = `<button data-id = "${task._id}" class = "startButton" type = "button"> Start </button>`}
         $('.displayData').append(`
@@ -33,6 +42,8 @@ const render = () => {
         <h2> ${task.timeCommit}</h2>
         <button data-id = "${task._id}" class = "deleteButton" type = "button">Remove </button>
         ${buttons}
+        
+        <h3>Total Time: ${moment.utc(totalTime).format("HH: mm: ss")}</h3>
             </div>`)
     })
     
@@ -168,7 +179,7 @@ $('.displayData').on("click", ".startButton", e => {
 $('.displayData').on('click', '.stopButton', e => {
     e.preventDefault();
     const id = $(e.target).data("id")
-    const taskId = $(e.target).data("taskId")
+    const taskId = $(e.target).data("taskid")
     console.log(taskId + " stopButton id")
 
 
@@ -191,3 +202,25 @@ $('.displayData').on('click', '.stopButton', e => {
             render()
         })
 })
+
+
+
+
+
+
+
+
+
+
+// add a session div & class to my map button
+// <h3>Started ${moment(session.timeStart)}.fromNow(
+    
+
+// let timer = setInterval(render, )))
+
+// const totalTIme = task.timeSession.redule [(acc ,curr)= > {
+//     let start = moment(curr.timStart)
+// }]
+
+
+console.log(moment().format("ddd, hA"))

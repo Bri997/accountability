@@ -8,11 +8,12 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const auth = require('../middleware/auth')
 
-router.get('/me', auth, async (req, res => {
+router.get('/me', auth, async (req, res) => {
+    console.log(req.user)
     const user = await User.findById(req.user._id).select('-password');
     res.send(user)
 
-}))
+})
 
 router.post('/', async (req, res) => {
 //    console.log(req.body)
@@ -33,11 +34,6 @@ router.post('/', async (req, res) => {
     res.header('x-auth-token', token).send(_.pick(user, ['name', 'email']))
 
    
-    // using this lodash instead
-    // res.send({
-    //     name: user.name,
-    //     email: user.email
-    // })
 });
 
 

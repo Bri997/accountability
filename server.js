@@ -1,9 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const Joi = require('joi');
+const bodyParser = require('body-parser');
+const jsonParser = bodyParser.json();
+const _ = require('lodash')
+const config = require('config')
 
 const app = express();
 mongoose.Promise = global.Promise;
 
+app.use(jsonParser)
 
 const { PORT, DATABASE_URL } = require('./config');
 
@@ -14,6 +20,19 @@ app.use('/task', taskRouter)
 
 const timeSessions = require('./timeSessionRouter')
 app.use('/timesession', timeSessions)
+
+const users = require('./routes/users')
+app.use('/api/users', users)
+
+const auth = require('./routes/auth');
+app.use('/api/auth', auth)
+
+if (!config.get('jwtPrivateKey')){
+  console.error('Fatal Error: JWT Token not defined ')
+  process.exit(1)
+}
+
+
 
 let server;
 

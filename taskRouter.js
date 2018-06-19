@@ -21,7 +21,7 @@
 // look at the blog post app and the node-jwt-auth 
 
 
-
+const auth = require('./middleware/auth')
 const express = require('express');
 const router = express.Router();
 
@@ -33,6 +33,8 @@ const jsonParser = bodyParser.json();
 const {Task} = require('./taskModel')
 
 router.get('/', (req, res) => {
+
+  
     Task
     .find()
     .populate("timeSessions")
@@ -47,7 +49,7 @@ router.get('/', (req, res) => {
 
 
 
-router.post('/', jsonParser, (req, res) => {
+router.post('/', auth, jsonParser, (req, res) => {
 
     const requiredFields = ['taskName', 'timeCommit'];
     for (let i = 0; i < requiredFields.length; i++){

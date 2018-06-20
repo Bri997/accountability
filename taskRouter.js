@@ -49,7 +49,7 @@ router.get('/', (req, res) => {
 
 
 
-router.post('/', auth, jsonParser, (req, res) => {
+router.post('/',  jsonParser, (req, res) => {
 
     const requiredFields = ['taskName', 'timeCommit'];
     for (let i = 0; i < requiredFields.length; i++){

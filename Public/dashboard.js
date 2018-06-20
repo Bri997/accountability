@@ -30,12 +30,23 @@ const render = () => {
         
         const openSessions = task.timeSessions.filter(session => !session.timeStop) 
         let buttons = ""
+        let timers = [];
         if(openSessions.length > 0){
             buttons = openSessions
-            .map(session => 
-                `<button data-id = "${session._id}" data-taskid = "${task._id}" class = "stopButton" type = "button"> Stop </button>`
-            ).join('')}
+            .map(session => {
+              let seconds = moment.duration(moment().diff(moment(session.timeStart))).asSeconds();
+              timers.push({
+                id: "timer_" + session._id,
+                seconds: seconds
+              });
+              return `<div>
+                  <div id="timer_${session._id}"></div>
+<button data-id = "${session._id}" data-taskid = "${task._id}" class = "stopButton" type = "button"> Stop </button>
+
+</div>`
+            }).join('')}
         else {buttons = `<button data-id = "${task._id}" class = "startButton" type = "button"> Start </button>`}
+
         $('.displayData').append(`
         <div class = "task">
         <h1> ${task.name}</h1>
@@ -44,12 +55,20 @@ const render = () => {
         ${buttons}
         
         <h3>Total Time: ${moment.utc(totalTime).format("HH: mm: ss")}</h3>
-            </div>`)
+            </div>`);
+
+        //start the timers
+      timers.forEach(timer => {
+        $(`#${timer.id}`).timer({
+          seconds: timer.seconds,
+          format: "%h:%M:%S"
+        });
+      });
     })
     
 }
 
-//when page loads
+
 
 $(function (){
     fetchTask()
@@ -208,19 +227,3 @@ $('.displayData').on('click', '.stopButton', e => {
 
 
 
-
-
-
-
-// add a session div & class to my map button
-// <h3>Started ${moment(session.timeStart)}.fromNow(
-    
-
-// let timer = setInterval(render, )))
-
-// const totalTIme = task.timeSession.redule [(acc ,curr)= > {
-//     let start = moment(curr.timStart)
-// }]
-
-
-console.log(moment().format("ddd, hA"))

@@ -76,12 +76,17 @@
                 </li>  
             </ul>
         </nav>
-    
+        <h1 style = "padding-left: 250px;">Sign Up</h1>
     <div class = "signUpForum">
+         <form id = "signUpForum">  
+        <h3>Name:</h3> <input class = "signUpName" placeholder = "Name">
         <h3>Email:</h3> <input class = "signUpEmail" placeholder = "email">
         <h3>Password:</h3> <input class = "signUpPassword" placeholder = "Password">
         <h3>Confirm Password:</h3> <input class = "signUpConfirmPassword" placeholder = "Confirm Password">
         <button class = "signUpSubmit" type = "signUpsubmit">Submit</button>
+    </form> 
+
+    <div class = "errorMessage"></div>
 </div>
 
 
@@ -90,4 +95,5 @@
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
+  <script src = "signup.js"></script>
 </html>

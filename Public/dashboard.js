@@ -1,5 +1,13 @@
 const data = {};
 
+const token = localStorage.getItem("token")
+const user = JSON.parse(localStorage.getItem("user"))
+console.log(user)
+if (!token){
+    window.location = "/"
+}
+
+$(".welcomeMessage").html(`Hello ${user.name}`)
 
 const fetchTask = () => {
     return fetch('/task', {
@@ -50,7 +58,7 @@ const render = () => {
         $('.displayData').append(`
         <div class = "task">
         <h1> ${task.name}</h1>
-        <h2> ${task.timeCommit}</h2>
+        <h2> ${task.timeCommit} hours</h2>
         <button data-id = "${task._id}" class = "deleteButton" type = "button">Remove </button>
         ${buttons}
         
@@ -69,6 +77,7 @@ const render = () => {
 }
 
 
+// console.log(data)
 
 $(function (){
     fetchTask()
@@ -79,7 +88,7 @@ $(function (){
 
 $('.startButton').click(e => {
 e.preventDefault();
-console.log('clicked')
+
 let currentDate = Date.now()
 console.log(currentDate);
 
@@ -223,7 +232,11 @@ $('.displayData').on('click', '.stopButton', e => {
 })
 
 
-
+$(".logOut").on('click', function(e) {
+    localStorage.removeItem("user")
+    localStorage.removeItem("token")
+    window.location = "/"
+})
 
 
 

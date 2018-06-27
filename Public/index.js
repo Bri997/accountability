@@ -5,4 +5,4 @@ const express = require('express')
 const users = require('../routes/users')
 
 
-app.use('/api/users', users)
+app.use('/api/users/me', users)

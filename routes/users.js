@@ -8,9 +8,10 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const auth = require('../middleware/auth')
 
-router.get('/me', auth, async (req, res) => {
-    console.log(req.user)
-    const user = await User.findById(req.user._id).select('-password');
+
+router.get('/me', async (req, res) => {
+    
+    const user = await User.find(User.email).select('-password');
     res.send(user)
 
 })

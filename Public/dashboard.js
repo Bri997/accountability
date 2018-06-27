@@ -3,6 +3,7 @@ const data = {};
 const token = localStorage.getItem("token")
 const user = JSON.parse(localStorage.getItem("user"))
 console.log(user)
+
 if (!token){
     window.location = "/"
 }
@@ -13,7 +14,8 @@ const fetchTask = () => {
     return fetch('/task', {
         method: "get",
         headers: {
-            'content-type': 'application/json'
+            'content-type': 'application/json',
+            'x-auth-token': token
         }
     })
     .then(response => response.json())
@@ -102,14 +104,16 @@ $('.commitButton').click(e => {
     e.preventDefault();
     let taskName = $('#taskName').val()
     let hours = $('#hours').val()
-   fetch ("http://localhost:8080/task/", {
+   fetch ("http://localhost:8080/task", {
        body: JSON.stringify({
         "taskName": taskName,
         "timeCommit": hours
        }),
        method: "post",
        headers: {
-               'content-type': 'application/json'
+               'content-type': 'application/json',
+               'x-auth-token': token
+
       },
        
 

@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        minlength: 5,
+        minlength: 3,
         maxlength: 50
     },
     email: {
@@ -23,7 +23,10 @@ const userSchema = new mongoose.Schema({
         minlength: 5,
         maxlength: 255,
         
-    }
+    },
+    tasks: [
+        {type: mongoose.Schema.Types.ObjectId,ref: "Task"}
+    ]
 
 });
 userSchema.methods.generateAuthToken = function () {
@@ -34,7 +37,7 @@ const User = mongoose.model('User', userSchema)
 
 function validateUser(user) {
     const schema = {
-        name: Joi.string().min(5).max(50).required(),
+        name: Joi.string().min(3).max(50).required(),
         email: Joi.string().min(5).max(255).required().email(),
         password: Joi.string().min(5).max(255).required()
     };

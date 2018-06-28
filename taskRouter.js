@@ -47,7 +47,7 @@ router.post('/', auth, jsonParser, (req, res) => {
 
   User.findById(req.user._id)
   .then(user => {
-    Task
+    return Task
     .create({
       name: req.body.taskName,
       timeCommit: req.body.timeCommit

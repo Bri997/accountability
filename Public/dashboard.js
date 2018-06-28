@@ -1,14 +1,8 @@
 const data = {};
+let user = {};
 
-const token = localStorage.getItem("token")
-const user = JSON.parse(localStorage.getItem("user"))
-console.log(user)
 
-if (!token){
-    window.location = "/"
-}
 
-$(".welcomeMessage").html(`Hello ${user.name}`)
 
 const fetchTask = () => {
     return fetch('/task', {
@@ -24,6 +18,20 @@ const fetchTask = () => {
     })
 }
 
+const fetchUser = () => {
+    return fetch("/api/users/me", {
+        method: "get",
+        headers: {
+            'content-type': 'application/json',
+            'x-auth-token': token
+        }
+    })
+    .then(response => response.json())
+    .then(_user => {
+        user = _user
+        $(".welcomeMessage").html(`Hello ${user.name}`)
+    })
+}
 
 const render = () => {
     $('.displayData').empty();
@@ -86,6 +94,7 @@ $(function (){
     .then(()=> {
         render();
     })
+    fetchUser()
 })
 
 $('.startButton').click(e => {

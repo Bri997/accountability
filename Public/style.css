@@ -10,7 +10,7 @@
 
 
 .container{
-    margin-left: 65px;
+    margin-left: 255px;
 }
 .signUpForum {
     background-color: lightsteelblue;
@@ -115,8 +115,28 @@
     margin-top: 1%;
 }
 
+.commitButton {
+    margin-top: 15px;
+    background-color: rgb(14, 118, 216);
+    height: 50px;
+    width: 95px;
+    border-radius: 15px;
+    border: 1px;
+    color: white;
+    font-size: 1em;
+}
 
-
+.commitButton:hover {
+    margin-top: 15px;
+    background-color: rgb(14, 109, 199);
+    height: 50px;
+    width: 105px;
+    border-radius: 15px;
+    border: 1px;
+    color: white;
+    font-size: 1.1em;
+    transition-duration: 0.1s;
+}
 
 
 .fa-2x {
@@ -141,7 +161,7 @@ overflow:visible;
 .main-menu {
 background:#047fa5;
 border-right:1px solid #e5e5e5;
-position:absolute;
+position:fixed;
 top:0;
 bottom:0;
 height:100%;
@@ -301,3 +321,22 @@ height: 100%;
   }
 
   
+
+
+
+
+
+
+
+  @keyframes yourAnimation{
+    0%{
+        transform: rotate(0) scale(.00);
+        }
+    100%{
+        transform: rotate(0) scale(1);
+        }
+}
+
+.task{
+    animation: yourAnimation .4s 1 0s ease;
+}

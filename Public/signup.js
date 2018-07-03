@@ -3,7 +3,7 @@ $(function(){
     $("#signUpForum").on('submit', function(e) {
         e.preventDefault()
         let name = $(".signUpName").val()
-        let email = $(".signUpEmail").val()
+        let email = $(".signUpEmail").val().toLowerCase()
         let firstPassword = $(".signUpPassword").val()
         let confirmPassword = $(".signUpConfirmPassword").val()
         console.log(firstPassword + confirmPassword)

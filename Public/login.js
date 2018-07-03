@@ -3,7 +3,7 @@ $(function(){
     $(".loginSubmit").on('click', function(e) {
         e.preventDefault()
         
-        let email = $(".logInEmail").val()
+        let email = $(".logInEmail").val().toLowerCase()
         let clientPassword = $(".logInPassword").val()
         fetch ('/api/auth', {
             method: "post",

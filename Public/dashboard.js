@@ -1,7 +1,7 @@
 const data = {};
 let user = {};
 
-console.log('test')
+
 
 
 const fetchTask = () => {
@@ -29,7 +29,10 @@ const fetchUser = () => {
     .then(response => response.json())
     .then(_user => {
         user = _user
-        $(".welcomeMessage").html(`Hello ${user.name}`)
+        let firstLetter = user.name.charAt(0).toUpperCase()
+        let remaining = user.name.slice(1)
+        let userName = `${firstLetter}${remaining}`
+        $(".welcomeMessage").html(`Hello ${userName}`)
     })
 }
 
@@ -87,7 +90,7 @@ const render = () => {
 }
 
 
-// console.log(data)
+
 
 $(function (){
     fetchTask()
@@ -101,7 +104,7 @@ $('.startButton').click(e => {
 e.preventDefault();
 
 let currentDate = Date.now()
-console.log(currentDate);
+
 
 let timeElapsed = currentDate - Date.now();
 
@@ -152,7 +155,7 @@ $('.getMyTasks').click(e => {
     })
     .then(response => response.json())
     .then(tasks => {
-      console.log(tasks)
+      
       for(i = 0; i < tasks.length; i++){
         $('.displayData').append(`
         <div> ${tasks[i].name}</div>
@@ -168,7 +171,7 @@ $('.getMyTasks').click(e => {
 $('.displayData').on("click", ".deleteButton", e => {
     e.preventDefault();
     const id = $(e.target).data("id")
-    console.log(id);
+    
 
     fetch (`/task/${id}`, {
         method: "delete",
@@ -198,7 +201,6 @@ $('.displayData').on("click", ".deleteButton", e => {
 $('.displayData').on("click", ".startButton", e => {
     e.preventDefault();
     const id = $(e.target).data("id")
-    console.log(id + " startbutton id")
 
     fetch (`/timesession/${id}`, {
         method: "post",
@@ -221,7 +223,7 @@ $('.displayData').on('click', '.stopButton', e => {
     e.preventDefault();
     const id = $(e.target).data("id")
     const taskId = $(e.target).data("taskid")
-    console.log(taskId + " stopButton id")
+    
 
 
         fetch(`/timesession/${id}`, {

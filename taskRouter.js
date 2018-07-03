@@ -54,8 +54,8 @@ router.post('/', auth, jsonParser, (req, res) => {
 
     })
     .then(task => {
-      task.user = user,
-      user.tasks.push(task)
+      task.user = user._id,
+      user.tasks.push(task._id)
       return user.save().then(user => {
         return task.save()
       })
@@ -141,4 +141,3 @@ router.use('*', function (req, res){
 
   
   module.exports = router;
-  

@@ -38,7 +38,9 @@ const fetchUser = () => {
 
 const render = () => {
     $('.displayData').empty();
+    if (data.tasks) {
     const tasks = data.tasks;
+   
     tasks.forEach(task => {
 
         const totalTime = task.timeSessions.reduce((acc, curr) => {
@@ -86,7 +88,7 @@ const render = () => {
         });
       });
     })
-    
+ }   
 }
 
 

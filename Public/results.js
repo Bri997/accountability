@@ -7,6 +7,13 @@ const timeDate = {
 }
 
 
+function TaskResults (task, timeCommit){
+    this.task = task,
+    this.timeCommit = timeCommit
+
+    
+}
+
 
 
 $(".getResults").on("click", function(e){

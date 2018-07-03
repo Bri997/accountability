@@ -17,13 +17,21 @@ $(function(){
             }
         
         })
-        
+        .then(response => {
+            if(!response.ok){
+                throw Error (response.statusText)
+            }
+            return response
+        })
         .then(response => response.text()) 
         .then(token => {
             localStorage.setItem("token", (token))
             window.location = "/dashboard.html"
         
         })
+        .catch(error => {
+            ($(".loginErrorMessage").append(`<div class = 'errorMessage'> <h3>Invalid Email or Password Please Try Again</h3> </div>`))
+        }) 
                      
              
         

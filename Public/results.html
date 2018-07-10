@@ -4,18 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
     <script src = "auth.js"></script>
 
 </head>
 <body>
-    <h1>Hello World</h1>
+    <!-- Sidebar and Navi -->
+    <div class="area"></div>
+    <nav class="main-menu">
+            <ul>
+                <li>
+                    <a href="dashboard.html">
+                        <i class="fa fa-home fa-2x"></i>
+                        <span class="nav-text">
+                            Dashboard
+                        </span>
+                    </a>
+                  
+                </li>   
+                               
+                        
+                
+                <li>
+                    <a href="results.html">
+                            <i class="fa fa-area-chart fa-2x"></i>
+                        <span class="nav-text">
+                            Results
+                        </span>
+                    </a>
+                </li>
+              
+                
 
-    <button class = "getResults">Get Results</button>
+                <li>
+                        <a href="login.html">
+                                <i class="fa fa-user fa-2x"></i>
+                            <span class="nav-text">
+                               Account
+                            </span>
+                        </a>
+                    </li>
 
+                    <li>
+                            <a href="index.html">
+                                    <i class="fa fa-angle-double-left fa-2x"></i>
+                                <span class="nav-text">
+                                   Home
+                                </span>
+                            </a>
+                        </li>
+                   
+                      
+            </ul>
 
-    <canvas id="myChart" width="400" height="400"></canvas>
+            <ul class="logOut">
+                <li>
+                   <a href="index.html">
+                         <i class="fa fa-power-off fa-2x"></i>
+                        <span class="nav-text">
+                            Logout
+                        </span>
+                    </a>
+                </li>  
+            </ul>
+        </nav>
 
+    
+
+        <h2 class = "resultsMessage">Your Results</h2>
+<div class = "userResults">
+    
+    <canvas id="myChart"></canvas>
+</div>
 
 
 

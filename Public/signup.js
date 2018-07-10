@@ -6,7 +6,7 @@ $(function(){
         let email = $(".signUpEmail").val().toLowerCase()
         let firstPassword = $(".signUpPassword").val()
         let confirmPassword = $(".signUpConfirmPassword").val()
-        console.log(firstPassword + confirmPassword)
+        
         let errorMessage = null
         if( !(firstPassword === confirmPassword)){
             errorMessage = "Passwords Must Match"
@@ -31,6 +31,15 @@ $(function(){
                 
             })
             .then(response => {
+                if(!response.ok){
+                    return response.text().then(text => {
+                        throw Error(text)
+                    })
+                }
+                return response
+            })
+
+            .then(response => {
                 localStorage.setItem("token", response.headers.get("x-auth-token"))
                 return response
             })
@@ -39,6 +48,10 @@ $(function(){
                 localStorage.setItem("user", JSON.stringify(user))
                 window.location = "/dashboard.html"
             
+            })
+            .catch(error => {
+                $(".errorMessage").html(error)
+                
             })
         }
     })

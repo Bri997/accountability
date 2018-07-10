@@ -1,18 +1,4 @@
-const taskData = {
-    
-}
 
-const timeDate = {
-    
-}
-
-
-function TaskResults (task, timeCommit){
-    this.task = task,
-    this.timeCommit = timeCommit
-
-    
-}
 
 function renderChart(tasks) {
   let ctx = document.getElementById("myChart");
@@ -30,7 +16,7 @@ function renderChart(tasks) {
       return acc + seconds;
     }, 0);
     labels.push(task.name);
-    data.push(totalTime);
+    data.push(Math.floor(totalTime));
     //randomly pick colors
 
 
@@ -75,31 +61,6 @@ function renderChart(tasks) {
 }
 
 
-$(".getResults").on("click", function(e){
-    console.log('clicked')
-     
-         fetch('/task', {
-            method: "get",
-            headers: {
-                'content-type': 'application/json',
-                'x-auth-token': token
-            }
-        })
-        .then(response => response.json())
-        .then(tasks => {
-            // taskData.tasks = tasks
-            //  for(let task of tasks){
-            //      console.log(task)
-            //  }
-
-          renderChart(tasks);
-
-        })
-        
-    }
-    
-)
-
 
 
 
@@ -121,3 +82,25 @@ const fetchUser = () => {
         $(".welcomeMessage").html(`Hello ${userName}`)
     })
 }
+
+
+$(function (){
+
+  fetch('/task', {
+    method: "get",
+    headers: {
+        'content-type': 'application/json',
+        'x-auth-token': token
+    }
+})
+.then(response => response.json())
+.then(tasks => {
+    // taskData.tasks = tasks
+    //  for(let task of tasks){
+    //      console.log(task)
+    //  }
+
+  renderChart(tasks);
+
+})
+})

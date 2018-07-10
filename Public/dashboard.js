@@ -40,8 +40,15 @@ const render = () => {
     $('.displayData').empty();
     if (data.tasks) {
     const tasks = data.tasks;
-   
+
+        
     tasks.forEach(task => {
+
+        let firstLetter = task.name.charAt(0).toUpperCase()
+        let remaining = task.name.slice(1)
+        let displayTask = `${firstLetter}${remaining}`
+
+
 
         const totalTime = task.timeSessions.reduce((acc, curr) => {
             let start = moment(curr.timeStart);
@@ -72,8 +79,8 @@ const render = () => {
 
         $('.displayData').append(`
         <div class = "task">
-        <h1> ${task.name}</h1>
-        <h2> ${task.timeCommit} hours</h2>
+        <h1> ${displayTask}</h1>
+        <h2> ${task.timeCommit} Hours</h2>
         <button data-id = "${task._id}" class = "deleteButton" type = "button">Remove </button>
         ${buttons}
         
@@ -117,31 +124,43 @@ let timeElapsed = currentDate - Date.now();
 $('.commitButton').click(e => {
     e.preventDefault();
     let taskName = $('#taskName').val()
+    
     let hours = $('#hours').val()
-   fetch ("http://localhost:8080/task", {
-       body: JSON.stringify({
-        "taskName": taskName,
-        "timeCommit": hours
-       }),
-       method: "post",
-       headers: {
-               'content-type': 'application/json',
-               'x-auth-token': token
+    
+    if(!taskName || !hours){
+        $('.errorMessage').html("Please input a task and hours")
+    }
+    else{
+        fetch ("http://localhost:8080/task", {
+        body: JSON.stringify({
+            "taskName": taskName,
+            "timeCommit": hours
+        }),
+        method: "post",
+        headers: {
+                'content-type': 'application/json',
+                'x-auth-token': token
 
-      },
+        },
        
 
        
-   })
+    })
+   
    .then(response => response.json())
    .then(task => {
        data.tasks.push(task)
    })
    .then(() => {
        render()
+       $('#taskName').val("")
+       $('#hours').val("")
+       $('.errorMessage').html('')
         })
+    }
 
     })
+
     
 
 $('.getMyTasks').click(e => {

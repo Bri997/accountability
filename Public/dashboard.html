@@ -24,18 +24,8 @@
                     </a>
                   
                 </li>   
-                 
-                
-                <li class="has-subnav">
-                    <a href="#">
-                       <i class="fa fa-list fa-2x"></i>
-                        <span class="nav-text">
-                            Tasks
-                        </span>
-                    </a>
-                    
-                </li>
-             
+                               
+                        
                 
                 <li>
                     <a href="results.html">
@@ -46,17 +36,10 @@
                     </a>
                 </li>
               
-                <li>
-                   <a href="setup.html">
-                       <i class="fa fa-cogs fa-2x"></i>
-                        <span class="nav-text">
-                            Setup
-                        </span>
-                    </a>
-                </li>
+                
 
                 <li>
-                        <a href="signup.html">
+                        <a href="login.html">
                                 <i class="fa fa-user fa-2x"></i>
                             <span class="nav-text">
                                Account
@@ -64,6 +47,16 @@
                         </a>
                     </li>
                       
+
+                    <li>
+                            <a href="index.html">
+                                    <i class="fa fa-angle-double-left fa-2x"></i>
+                                <span class="nav-text">
+                                   Home
+                                </span>
+                            </a>
+                        </li>
+                   
             </ul>
 
             <ul class="logOut">
@@ -85,15 +78,15 @@
 <div class = "container">           
     <h2 class = "welcomeMessage"></h2>              
     <div class = "upDateTasks">
-                <p>Task Name</p><input id = "taskName" type = "text" placeholder = "Task"></input>
-                <p>Hours to commit</p><input id = "hours" type = "Hours" placeholder = "Hours"></input>
+                <h3>Task Name</h3><input id = "taskName" type = "text" placeholder = "Task"></input>
+                <h3>Hours To Commit</h3><input id = "hours" type = "number" placeholder = "Hours"></input>
                 <br>
                 <button class = "commitButton" type = "submit">Commit</button>
              
     </div>
-    
+    <div class = "errorMessage"></div>
     <div class = "displayData">
-          <!-- <button class = "deleteButton" type="button">Remove</button> -->
+          
     </div>
       
 </div>

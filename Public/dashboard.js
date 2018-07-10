@@ -131,7 +131,7 @@ $('.commitButton').click(e => {
         $('.errorMessage').html("Please input a task and hours")
     }
     else{
-        fetch ("http://localhost:8080/task", {
+        fetch ("/task", {
         body: JSON.stringify({
             "taskName": taskName,
             "timeCommit": hours

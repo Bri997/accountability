@@ -13,7 +13,7 @@ app.use(jsonParser)
 
 const { PORT, DATABASE_URL } = require('./config');
 
-app.use(express.static('public'));
+app.use(express.static('Public'));
 
 const taskRouter = require('./taskRouter')
 app.use('/task', taskRouter)

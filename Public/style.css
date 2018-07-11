@@ -112,6 +112,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', end
 .signUpContainer {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .signUpForum {
